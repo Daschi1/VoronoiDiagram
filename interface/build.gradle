@@ -1,0 +1,23 @@
+apply plugin: 'java'
+
+configurations {
+    jar.archiveName = rootProject.name + '.' + project.name + "-" + getVersion() + '.jar'
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "de.daschi.voronoidiagram.application.VoronoiDiagram"
+    }
+
+    jar {
+        from {
+            configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+        }
+        exclude("META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA")
+    }
+}
+
+dependencies {
+    implementation project(":api")
+    compile project(":api")
+}

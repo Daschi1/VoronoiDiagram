@@ -1,0 +1,5 @@
+apply plugin: 'java'
+
+configurations {
+    jar.archiveName = rootProject.name + '.' + project.name + "-" + getVersion() + '.jar'
+}
